@@ -5,7 +5,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { AppHeader } from '@/components/AppHeader';
-import { Dock } from '@/components/Dock';
+import { FluidGlassBar } from '@/components/FluidGlassBar';
 import { MobileDock } from '@/components/MobileDock';
 import SmoothScrolling from '@/components/SmoothScrolling';
 
@@ -31,7 +31,7 @@ export default function RootLayout({
         >
           <SmoothScrolling>
             <AnimatedBackground />
-            <Dock />
+            <FluidGlassBar />
             <MobileDock />
             <main className="min-h-screen relative z-10 flex flex-col pb-24 md:pb-24">
               <AppHeader />
