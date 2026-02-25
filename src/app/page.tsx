@@ -14,22 +14,24 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen relative overflow-hidden overflow-x-hidden">
       {/* Top Navigation */}
-      <div className="absolute top-4 right-4 md:top-8 md:right-8 flex gap-4 z-50">
-        {user ? (
-          <Link href="/history">
-            <button className="flex items-center px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium">
-              <History className="h-4 w-4 mr-2" />
-              History Dashboard
-            </button>
-          </Link>
-        ) : (
-          <Link href="/login">
-            <button className="flex items-center px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 transition-colors text-sm font-medium shadow-lg shadow-emerald-500/20">
-              <LogIn className="h-4 w-4 mr-2" />
-              Sign In
-            </button>
-          </Link>
-        )}
+      <div className="absolute top-0 left-0 right-0 z-50 pointer-events-none">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex flex-row items-center justify-end pointer-events-auto">
+          {user ? (
+            <Link href="/history">
+              <button className="flex items-center px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium">
+                <History className="h-4 w-4 mr-2" />
+                History Dashboard
+              </button>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <button className="flex items-center px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 transition-colors text-sm font-medium shadow-lg shadow-emerald-500/20">
+                <LogIn className="h-4 w-4 mr-2" />
+                Sign In
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
 
       {/* HERO SECTION */}
