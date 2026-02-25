@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { AppHeader } from '@/components/AppHeader';
 import { Dock } from '@/components/Dock';
+import { MobileDock } from '@/components/MobileDock';
 import SmoothScrolling from '@/components/SmoothScrolling';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -31,7 +32,8 @@ export default function RootLayout({
           <SmoothScrolling>
             <AnimatedBackground />
             <Dock />
-            <main className="min-h-screen relative z-10 flex flex-col pb-24">
+            <MobileDock />
+            <main className="min-h-screen relative z-10 flex flex-col pb-24 md:pb-24">
               <AppHeader />
               {children}
             </main>

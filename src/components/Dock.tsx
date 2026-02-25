@@ -99,7 +99,7 @@ export function Dock() {
     if (!mounted) return null;
 
     return (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
             <motion.div
                 onMouseMove={(e) => mouseX.set(e.pageX)}
                 onMouseLeave={() => mouseX.set(Infinity)}
