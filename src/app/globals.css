@@ -1,9 +1,10 @@
-
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
 }
 
 /* Custom Base Styles */
@@ -56,7 +57,7 @@
 
 @layer base {
   body {
-    @apply bg-transparent text-foreground;
+    @apply bg-transparent text-foreground transition-colors duration-500;
   }
 }
 
@@ -70,6 +71,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -81,8 +83,13 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .pause {

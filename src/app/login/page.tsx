@@ -2,19 +2,20 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/utils/supabase/client';
+import { signInAction, signUpAction } from './actions';
 import { GlassCard } from '@/components/GlassCard';
 import { Loader2, LogIn, UserPlus } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {
+    const [fullName, setFullName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [confirmPassword, setConfirmPassword] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
     const [isSignUp, setIsSignUp] = React.useState(false);
     const router = useRouter();
-    const supabase = createClient();
 
     const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,22 +24,28 @@ export default function LoginPage() {
 
         try {
             if (isSignUp) {
-                const { error } = await supabase.auth.signUp({
-                    email,
-                    password,
-                    options: {
-                        emailRedirectTo: `${location.origin}/auth/callback`,
-                    },
-                });
-                if (error) throw error;
-                // Supabase by default requires email confirmation, but for now we'll assume auto-login if disabled or show a message
+                if (password !== confirmPassword) {
+                    setError("Passwords do not match.");
+                    setIsLoading(false);
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('fullName', fullName);
+                formData.append('email', email);
+                formData.append('password', password);
+
+                const result = await signUpAction(formData);
+                if (result.error) throw new Error(result.error);
+
                 setError('Check your email for the confirmation link!');
             } else {
-                const { error } = await supabase.auth.signInWithPassword({
-                    email,
-                    password,
-                });
-                if (error) throw error;
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('password', password);
+
+                const result = await signInAction(formData);
+                if (result.error) throw new Error(result.error);
+
                 router.push('/generate');
                 router.refresh();
             }
@@ -68,6 +75,20 @@ export default function LoginPage() {
                     </div>
 
                     <form onSubmit={handleAuth} className="space-y-6">
+                        {isSignUp && (
+                            <div>
+                                <label className="block text-sm font-medium mb-2 text-gray-300">Full Name</label>
+                                <input
+                                    type="text"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    className="w-full p-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all outline-none text-white"
+                                    placeholder="Jane Doe"
+                                    required={isSignUp}
+                                />
+                            </div>
+                        )}
+
                         <div>
                             <label className="block text-sm font-medium mb-2 text-gray-300">Email Address</label>
                             <input
@@ -91,6 +112,20 @@ export default function LoginPage() {
                                 required
                             />
                         </div>
+
+                        {isSignUp && (
+                            <div>
+                                <label className="block text-sm font-medium mb-2 text-gray-300">Confirm Password</label>
+                                <input
+                                    type="password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="w-full p-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all outline-none text-white"
+                                    placeholder="••••••••"
+                                    required={isSignUp}
+                                />
+                            </div>
+                        )}
 
                         {error && (
                             <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">

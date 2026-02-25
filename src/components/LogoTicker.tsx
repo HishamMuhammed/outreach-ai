@@ -14,9 +14,9 @@ export function LogoTicker() {
     ];
 
     return (
-        <div className="py-24 bg-black/40 border-y border-white/5 overflow-hidden">
+        <div className="py-24 bg-slate-50 dark:bg-black/40 border-y border-slate-200 dark:border-white/5 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
-                <p className="text-sm font-semibold tracking-wider text-gray-500 uppercase">
+                <p className="text-sm font-bold tracking-wider text-slate-800 dark:text-gray-500 uppercase">
                     Empowering top-tier sales teams worldwide
                 </p>
             </div>
@@ -29,17 +29,17 @@ export function LogoTicker() {
                 */}
                 <div className="flex space-x-16 items-center min-w-full justify-around animate-marquee group-hover:pause">
                     {logos.map((logo, index) => (
-                        <div key={`logo-1-${index}`} className="flex items-center space-x-2 text-gray-500 hover:text-emerald-400 transition-colors opacity-50 hover:opacity-100 cursor-default grayscale hover:grayscale-0">
+                        <div key={`logo-1-${index}`} className="flex items-center space-x-2 text-slate-800 dark:text-gray-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors opacity-70 dark:opacity-50 hover:opacity-100 cursor-default grayscale hover:grayscale-0">
                             <logo.icon className="h-8 w-8" />
-                            <span className="text-xl font-bold tracking-tight">{logo.name}</span>
+                            <span className="text-xl font-black tracking-tight">{logo.name}</span>
                         </div>
                     ))}
                 </div>
                 <div className="flex space-x-16 items-center min-w-full justify-around animate-marquee group-hover:pause absolute top-0" style={{ left: '100%' }}>
                     {logos.map((logo, index) => (
-                        <div key={`logo-2-${index}`} className="flex items-center space-x-2 text-gray-500 hover:text-emerald-400 transition-colors opacity-50 hover:opacity-100 cursor-default grayscale hover:grayscale-0">
+                        <div key={`logo-2-${index}`} className="flex items-center space-x-2 text-slate-800 dark:text-gray-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors opacity-70 dark:opacity-50 hover:opacity-100 cursor-default grayscale hover:grayscale-0">
                             <logo.icon className="h-8 w-8" />
-                            <span className="text-xl font-bold tracking-tight">{logo.name}</span>
+                            <span className="text-xl font-black tracking-tight">{logo.name}</span>
                         </div>
                     ))}
                 </div>
